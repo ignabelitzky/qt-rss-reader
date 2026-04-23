@@ -1,4 +1,4 @@
-QT += widgets
+QT += widgets network
 
 CONFIG += c++17
 
@@ -11,12 +11,14 @@ SOURCES += \
     src/core/rssitem.cpp \
     src/core/rssparser.cpp \
     src/main.cpp \
+    src/models/rssmodel.cpp \
     src/ui/mainwindow.cpp
 
 HEADERS += \
     src/core/rssfetcher.h \
     src/core/rssitem.h \
     src/core/rssparser.h \
+    src/models/rssmodel.h \
     src/ui/mainwindow.h
 
 FORMS += \

@@ -1,8 +1,7 @@
 #include "rssfetcher.h"
 #include "rssparser.h"
-
-#include <QtNetwork/QNetworkReply>
-#include <QtNetwork/QNetworkRequest>
+#include <QNetworkReply>
+#include <QNetworkRequest>
 
 RssFetcher::RssFetcher(QObject *parent)
     : QObject{parent}

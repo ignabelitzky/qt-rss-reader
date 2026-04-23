@@ -2,7 +2,7 @@
 
 #include <QObject>
 #include <QUrl>
-#include <QtNetwork/QNetworkAccessManager>
+#include <QNetworkAccessManager>
 #include "rssitem.h"
 
 class RssFetcher : public QObject
