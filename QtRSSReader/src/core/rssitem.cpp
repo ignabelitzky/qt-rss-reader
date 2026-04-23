@@ -1,62 +1,62 @@
 #include "rssitem.h"
+#include <utility>
 
-RssItem::RssItem()
-    : m_title(QString(""))
-    , m_link(QString(""))
-    , m_description(QString(""))
-    , m_pubDate(QDate::currentDate())
+// Constructor
+RssItem::RssItem(QString title,
+                 QString link,
+                 QString description,
+                 QDateTime pubDate)
+    : m_title(std::move(title))
+    , m_link(std::move(link))
+    , m_description(std::move(description))
+    , m_pubDate(std::move(pubDate))
 {
-
 }
 
-RssItem::RssItem(const QString &title,
-                 const QString &link,
-                 const QString &description,
-                 const QDate& pubDate)
-    : m_title(title.trimmed())
-    , m_link(link.trimmed())
-    , m_description(description.trimmed())
-    , m_pubDate(pubDate)
-{
-
-}
-
-QString RssItem::title() const
+// Getters
+const QString& RssItem::title() const
 {
     return m_title;
 }
 
-QString RssItem::link() const
+const QString& RssItem::link() const
 {
     return m_link;
 }
 
-QString RssItem::description() const
+const QString& RssItem::description() const
 {
     return m_description;
 }
 
-QDate RssItem::pubDate() const
+const QDateTime& RssItem::pubDate() const
 {
     return m_pubDate;
 }
 
-void RssItem::setTitle(const QString &title)
+// Setters
+void RssItem::setTitle(const QString& title)
 {
-    m_title = title.trimmed();
+    m_title = title;
 }
 
-void RssItem::setLink(const QString &link)
+void RssItem::setLink(const QString& link)
 {
-    m_link = link.trimmed();
+    m_link = link;
 }
 
-void RssItem::setDescription(const QString &description)
+void RssItem::setDescription(const QString& description)
 {
-    m_description = description.trimmed();
+    m_description = description;
 }
 
-void RssItem::setPubDate(const QDate &pubDate)
+void RssItem::setPubDate(const QDateTime& pubDate)
 {
     m_pubDate = pubDate;
+}
+
+// Optional utility
+bool RssItem::isValid() const
+{
+    return !m_title.isEmpty() && !m_link.isEmpty();
 }

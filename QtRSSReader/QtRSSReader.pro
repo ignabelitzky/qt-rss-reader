@@ -8,11 +8,13 @@ CONFIG += c++17
 
 SOURCES += \
     src/core/rssitem.cpp \
+    src/core/rssparser.cpp \
     src/main.cpp \
     src/ui/mainwindow.cpp
 
 HEADERS += \
     src/core/rssitem.h \
+    src/core/rssparser.h \
     src/ui/mainwindow.h
 
 FORMS += \
