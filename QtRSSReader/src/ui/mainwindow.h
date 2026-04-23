@@ -1,6 +1,8 @@
 #pragma once
 
 #include <QMainWindow>
+#include "../core/rssfetcher.h"
+#include "../models/rssmodel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -18,4 +20,6 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    RssFetcher* m_fetcher;
+    RssModel* m_model;
 };
