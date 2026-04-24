@@ -26,6 +26,9 @@ private slots:
     void onFeedSelected(const QModelIndex& current, const QModelIndex& previous);
 
 private:
+    void setupConnections();
+
+private:
     Ui::MainWindow *ui;
     RssFetcher* m_fetcher;
     RssModel* m_rssModel;

@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setWindowTitle("Qt RSS Reader");
 
     m_repo = new FeedRepository();
     m_feedModel = new FeedTableModel(m_repo, this);
@@ -28,31 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->rssTableView->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
     ui->rssTableView->horizontalHeader()->setStretchLastSection(true);
 
-    connect(ui->addButton, &QPushButton::clicked, this, &MainWindow::onAddFeed);
-    connect(ui->removeButton, &QPushButton::clicked, this, &MainWindow::onRemoveFeed);
-
-    connect(ui->feedTableView->selectionModel(),
-            &QItemSelectionModel::currentRowChanged,
-            this, &MainWindow::onFeedSelected);
-
-    connect(m_fetcher, &RssFetcher::feedReady,
-            this, [this](const QVector<RssItem>& items) {
-        m_rssModel->setItems(items);
-    });
-
-    connect(m_fetcher, &RssFetcher::errorOcurred,
-            this, [](const QString& err) {
-        qDebug() << "Error:" << err;
-    });
-
-    connect(ui->rssTableView, &QTableView::doubleClicked,
-            this, [this](const QModelIndex& index) {
-        if (!index.isValid())
-            return;
-
-        const RssItem& item = m_rssModel->itemAt(index.row());
-        QDesktopServices::openUrl(QUrl(item.link()));
-    });
+    setupConnections();
 }
 
 MainWindow::~MainWindow()
@@ -113,4 +90,33 @@ void MainWindow::onFeedSelected(const QModelIndex& current, const QModelIndex& p
     m_rssModel->setItems({});
 
     m_fetcher->fetch(feed.url);
+}
+
+void MainWindow::setupConnections()
+{
+    connect(ui->addButton, &QPushButton::clicked, this, &MainWindow::onAddFeed);
+    connect(ui->removeButton, &QPushButton::clicked, this, &MainWindow::onRemoveFeed);
+
+    connect(ui->feedTableView->selectionModel(),
+            &QItemSelectionModel::currentRowChanged,
+            this, &MainWindow::onFeedSelected);
+
+    connect(m_fetcher, &RssFetcher::feedReady,
+            this, [this](const QVector<RssItem>& items) {
+                m_rssModel->setItems(items);
+            });
+
+    connect(m_fetcher, &RssFetcher::errorOcurred,
+            this, [](const QString& err) {
+                qDebug() << "Error:" << err;
+            });
+
+    connect(ui->rssTableView, &QTableView::doubleClicked,
+            this, [this](const QModelIndex& index) {
+                if (!index.isValid())
+                    return;
+
+                const RssItem& item = m_rssModel->itemAt(index.row());
+                QDesktopServices::openUrl(QUrl(item.link()));
+            });
 }
