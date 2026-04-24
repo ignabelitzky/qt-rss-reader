@@ -1,6 +1,7 @@
 #include "src/ui/mainwindow.h"
 
 #include <QApplication>
+#include <QFile>
 #include "db/databasemanager.h"
 
 int main(int argc, char *argv[])
@@ -10,6 +11,13 @@ int main(int argc, char *argv[])
     if (!DatabaseManager::initialize())
     {
         return -1;
+    }
+
+    QFile file(":/styles/style.qss");
+    if (file.open(QFile::ReadOnly))
+    {
+        QString style = file.readAll();
+        a.setStyleSheet(style);
     }
 
     MainWindow w;

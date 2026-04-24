@@ -10,25 +10,28 @@ RssFetcher::RssFetcher(QObject *parent)
             this, &RssFetcher::onReplyFinished);
 }
 
-void RssFetcher::fetch(const QUrl& url)
+void RssFetcher::fetch(int feedId, const QUrl& url)
 {
     if (!url.isValid())
     {
-        emit errorOcurred("Invalid URL");
+        emit errorOcurred(feedId, "Invalid URL");
         return;
     }
 
     QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::UserAgentHeader, "QtRSSReader/1.0");
 
-    m_manager.get(request);
+    QNetworkReply* reply = m_manager.get(request);
+    reply->setProperty("feedId", feedId);
 }
 
 void RssFetcher::onReplyFinished(QNetworkReply* reply)
 {
+    int feedId = reply->property("feedId").toInt();
+
     if (reply->error() != QNetworkReply::NoError)
     {
-        emit errorOcurred(reply->errorString());
+        emit errorOcurred(feedId, reply->errorString());
         reply->deleteLater();
         return;
     }
@@ -36,7 +39,7 @@ void RssFetcher::onReplyFinished(QNetworkReply* reply)
     const QByteArray data = reply->readAll();
     QVector<RssItem> items = RssParser::parse(data);
 
-    emit feedReady(items);
+    emit feedReady(feedId, items);
 
     reply->deleteLater();
 }

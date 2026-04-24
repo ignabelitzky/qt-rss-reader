@@ -12,11 +12,11 @@ public:
     explicit RssFetcher(QObject *parent = nullptr);
     ~RssFetcher() = default;
 
-    void fetch(const QUrl& url);
+    void fetch(int feedId, const QUrl& url);
 
 signals:
-    void feedReady(const QVector<RssItem>& items);
-    void errorOcurred(const QString& error);
+    void feedReady(int feedId, const QVector<RssItem>& items);
+    void errorOcurred(int feedId, const QString& error);
 
 private slots:
     void onReplyFinished(QNetworkReply* reply);

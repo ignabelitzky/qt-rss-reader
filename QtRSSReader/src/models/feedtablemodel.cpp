@@ -39,9 +39,9 @@ QVariant FeedTableModel::data(const QModelIndex& index, int role) const
         case Enabled:
             return feed.enabled ? "Yes" : "No";
         case LastFetched:
-            feed.lastFetched.isValid()
-                ? feed.lastFetched.toString(Qt::ISODate)
-                : "Never";
+            return feed.lastFetched.isValid()
+                       ? feed.lastFetched.toString()
+                       : "Never";
         }
     }
 

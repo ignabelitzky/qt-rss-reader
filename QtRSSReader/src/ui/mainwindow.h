@@ -21,12 +21,14 @@ public:
     ~MainWindow() override;
 
 private slots:
+    void onRefresh();
     void onAddFeed();
     void onRemoveFeed();
     void onFeedSelected(const QModelIndex& current, const QModelIndex& previous);
 
 private:
     void setupConnections();
+    void reloadFeedsPreserveSelection();
 
 private:
     Ui::MainWindow *ui;
@@ -34,4 +36,5 @@ private:
     RssModel* m_rssModel;
     FeedRepository* m_repo;
     FeedTableModel* m_feedModel;
+    int m_currentFeedId = -1;
 };
