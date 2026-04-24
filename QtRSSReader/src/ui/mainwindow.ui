@@ -16,21 +16,34 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
+     <widget class="QTableView" name="feedTableView"/>
+    </item>
+    <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QLabel" name="rssLinkLabel">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="addButton">
         <property name="text">
-         <string>Link</string>
+         <string>Add</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="urlLineEdit"/>
-      </item>
-      <item>
-       <widget class="QPushButton" name="loadButton">
+       <widget class="QPushButton" name="removeButton">
         <property name="text">
-         <string>Load</string>
+         <string>Remove</string>
         </property>
        </widget>
       </item>

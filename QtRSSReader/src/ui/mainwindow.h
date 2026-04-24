@@ -3,6 +3,8 @@
 #include <QMainWindow>
 #include "../core/rssfetcher.h"
 #include "../models/rssmodel.h"
+#include "../models/feedtablemodel.h"
+#include "../core/repositories/feedrepository.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -18,8 +20,15 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
 
+private slots:
+    void onAddFeed();
+    void onRemoveFeed();
+    void onFeedSelected(const QModelIndex& current, const QModelIndex& previous);
+
 private:
     Ui::MainWindow *ui;
     RssFetcher* m_fetcher;
-    RssModel* m_model;
+    RssModel* m_rssModel;
+    FeedRepository* m_repo;
+    FeedTableModel* m_feedModel;
 };
