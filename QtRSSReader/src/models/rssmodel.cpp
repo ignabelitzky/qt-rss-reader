@@ -1,4 +1,5 @@
 #include "rssmodel.h"
+#include <QColor>
 
 RssModel::RssModel(QObject *parent)
     : QAbstractTableModel{parent}

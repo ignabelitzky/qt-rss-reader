@@ -4,13 +4,18 @@
 #include <QUrl>
 #include <QMessageBox>
 #include "dialogs/addfeeddialog.h"
+#include "src/delegates/htmldelegate.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    showMaximized();
     setWindowTitle("Qt RSS Reader");
+
+    HtmlDelegate *delegate = new HtmlDelegate(this);
+    ui->rssTableView->setItemDelegate(delegate);
 
     m_repo = new FeedRepository();
     m_feedModel = new FeedTableModel(m_repo, this);
@@ -22,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->feedTableView->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->feedTableView->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
     ui->feedTableView->horizontalHeader()->setStretchLastSection(true);
+    ui->feedTableView->resizeColumnsToContents();
 
     ui->rssTableView->setModel(m_rssModel);
     ui->rssTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -115,6 +121,7 @@ void MainWindow::setupConnections()
                     return;
 
                 m_rssModel->setItems(items);
+                ui->rssTableView->resizeRowsToContents();
 
                 Feed feed = m_repo->getById(feedId);
                 feed.lastFetched = QDateTime::currentDateTime();

@@ -19,6 +19,7 @@ QTableView {
     border: 1px solid #3c3c3c;
     selection-background-color: #0078d4;
     selection-color: #ffffff;
+    color: #ffffff;
 }
 
 QHeaderView::section {

@@ -12,6 +12,7 @@ SOURCES += \
     src/core/rssitem.cpp \
     src/core/rssparser.cpp \
     src/db/databasemanager.cpp \
+    src/delegates/htmldelegate.cpp \
     src/main.cpp \
     src/models/feedtablemodel.cpp \
     src/models/rssmodel.cpp \
@@ -24,6 +25,7 @@ HEADERS += \
     src/core/rssitem.h \
     src/core/rssparser.h \
     src/db/databasemanager.h \
+    src/delegates/htmldelegate.h \
     src/models/feed.h \
     src/models/feedtablemodel.h \
     src/models/rssmodel.h \
