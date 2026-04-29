@@ -14,6 +14,14 @@ MainWindow::MainWindow(QWidget *parent)
     showMaximized();
     setWindowTitle("Qt RSS Reader");
 
+    QFont font = ui->searchLineEdit->font();
+    font.setPointSize(14);
+    ui->searchLineEdit->setFont(font);
+
+    m_searchTimer = new QTimer(this);
+    m_searchTimer->setInterval(150);
+    m_searchTimer->setSingleShot(true);
+
     HtmlDelegate *delegate = new HtmlDelegate(this);
     ui->rssTableView->setItemDelegate(delegate);
 
@@ -33,6 +41,11 @@ MainWindow::MainWindow(QWidget *parent)
     ui->rssTableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->rssTableView->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->rssTableView->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
+    ui->rssTableView->setColumnWidth(0, 600);
+    ui->rssTableView->setColumnWidth(1, 600);
+    ui->rssTableView->setColumnWidth(2, 300);
+    ui->rssTableView->setColumnWidth(3, 150);
+    ui->rssTableView->resizeRowsToContents();
     ui->rssTableView->horizontalHeader()->setStretchLastSection(true);
 
     setupConnections();
@@ -45,7 +58,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::onRefresh()
 {
+    ui->searchLineEdit->clear();
     reloadFeedsPreserveSelection();
+    ui->searchLineEdit->setFocus();
 }
 
 void MainWindow::onAddFeed()
@@ -143,6 +158,14 @@ void MainWindow::setupConnections()
                 const RssItem& item = m_rssModel->itemAt(index.row());
                 QDesktopServices::openUrl(QUrl(item.link()));
             });
+
+    connect(m_searchTimer, &QTimer::timeout,
+            this, [this]() {
+                const QString searchTerm = ui->searchLineEdit->text();
+                m_feedModel->setSearchTerm(searchTerm);
+            });
+
+    connect(ui->searchLineEdit, &QLineEdit::textChanged, m_searchTimer, qOverload<>(&QTimer::start));
 }
 
 void MainWindow::reloadFeedsPreserveSelection()
@@ -172,7 +195,7 @@ void MainWindow::reloadFeedsPreserveSelection()
                 selModel->setCurrentIndex(
                     index,
                     QItemSelectionModel::Select | QItemSelectionModel::Rows
-                );
+                    );
                 break;
             }
         }

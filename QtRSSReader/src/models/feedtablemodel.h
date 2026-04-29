@@ -29,12 +29,15 @@ public:
     bool setData(const QModelIndex& index, const QVariant& value, int role) override;
 
     // Custom API
+    void setSearchTerm(const QString& searchTerm);
     void load();
     void addFeed(const Feed& feed);
     void removeFeed(int row);
     const Feed& feedAt(int row) const;
 
+
 private:
+    QString m_searchTerm = QString("");
     QList<Feed> m_feeds;
     FeedRepository* m_repo;
 };

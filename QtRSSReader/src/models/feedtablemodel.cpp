@@ -141,10 +141,25 @@ bool FeedTableModel::setData(const QModelIndex& index, const QVariant& value, in
     return true;
 }
 
+void FeedTableModel::setSearchTerm(const QString &searchTerm)
+{
+    QString normalized = searchTerm.trimmed();
+
+    if (m_searchTerm == normalized)
+        return;
+
+    m_searchTerm = normalized;
+    load();
+}
+
 void FeedTableModel::load()
 {
     beginResetModel();
-    m_feeds = m_repo->getAll();
+    m_feeds.clear();
+    if (m_repo)
+    {
+        m_feeds = m_repo->getAllBySearchTerm(m_searchTerm);
+    }
     endResetModel();
 }
 

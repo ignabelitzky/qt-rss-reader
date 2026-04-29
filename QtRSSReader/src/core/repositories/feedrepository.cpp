@@ -11,7 +11,7 @@ QList<Feed> FeedRepository::getAll()
     QList<Feed> feeds;
 
     QSqlQuery query(DatabaseManager::database());
-    query.prepare("SELECT id, url, name, enabled, last_fetched FROM feeds");
+    query.prepare("SELECT id, url, name, enabled, last_fetched FROM feeds ORDER BY name");
 
     if (!query.exec())
     {
@@ -24,6 +24,32 @@ QList<Feed> FeedRepository::getAll()
         feeds.append(mapQueryToFeed(query));
     }
 
+    return feeds;
+}
+
+QList<Feed> FeedRepository::getAllBySearchTerm(const QString &searchTerm)
+{
+    QList<Feed> feeds;
+
+    QSqlQuery query(DatabaseManager::database());
+    query.prepare(R"(
+        SELECT id, url, name, enabled, last_fetched
+        FROM feeds
+        WHERE LOWER(name) LIKE LOWER(:search_term)
+        ORDER BY name
+    )");
+    query.bindValue(":search_term", "%" + searchTerm + "%");
+
+    if (!query.exec())
+    {
+        qCritical() << "FeedRepository::getAllBySearchTerm failed:" << query.lastError().text();
+        return feeds;
+    }
+
+    while (query.next())
+    {
+        feeds.append(mapQueryToFeed(query));
+    }
     return feeds;
 }
 

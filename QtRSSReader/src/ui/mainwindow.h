@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QMainWindow>
+#include <QTimer>
 #include "../core/rssfetcher.h"
 #include "../models/rssmodel.h"
 #include "../models/feedtablemodel.h"
@@ -36,5 +37,6 @@ private:
     RssModel* m_rssModel;
     FeedRepository* m_repo;
     FeedTableModel* m_feedModel;
+    QTimer* m_searchTimer = nullptr;
     int m_currentFeedId = -1;
 };

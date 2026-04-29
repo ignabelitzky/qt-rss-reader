@@ -10,6 +10,7 @@ public:
     FeedRepository();
 
     QList<Feed> getAll();
+    QList<Feed> getAllBySearchTerm(const QString& searchTerm);
     Feed getById(int id);
 
     bool add(const Feed& feed);
