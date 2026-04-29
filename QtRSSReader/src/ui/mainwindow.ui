@@ -92,7 +92,7 @@
         <item>
          <widget class="QPushButton" name="refreshButton">
           <property name="text">
-           <string>Refresh</string>
+           <string>&amp;Refresh</string>
           </property>
          </widget>
         </item>
@@ -112,7 +112,7 @@
         <item>
          <widget class="QPushButton" name="addButton">
           <property name="text">
-           <string>Add Feed</string>
+           <string>&amp;Add Feed</string>
           </property>
          </widget>
         </item>
@@ -161,8 +161,54 @@
      <height>23</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="addFeedAction"/>
+    <addaction name="separator"/>
+    <addaction name="exitAction"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="contactAction"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="addFeedAction">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::ListAdd"/>
+   </property>
+   <property name="text">
+    <string>&amp;Add Feed</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
+   </property>
+  </action>
+  <action name="contactAction">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::DialogInformation"/>
+   </property>
+   <property name="text">
+    <string>Contact</string>
+   </property>
+  </action>
+  <action name="exitAction">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::ApplicationExit"/>
+   </property>
+   <property name="text">
+    <string>E&amp;xit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

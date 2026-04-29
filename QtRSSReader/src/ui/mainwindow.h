@@ -26,6 +26,7 @@ private slots:
     void onAddFeed();
     void onRemoveFeed();
     void onFeedSelected(const QModelIndex& current, const QModelIndex& previous);
+    void onContactActionTriggered();
 
 private:
     void setupConnections();

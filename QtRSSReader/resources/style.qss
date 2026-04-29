@@ -3,7 +3,7 @@ QWidget {
     background-color: #1e1e1e;
     color: #e0e0e0;
     font-family: Segoe UI, Arial;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 /* ===== MAIN WINDOW ===== */
@@ -101,4 +101,61 @@ QToolTip {
     border: 1px solid #5a5a5a;
     padding: 4px;
 }
+
+/* ===== MENU BAR ===== */
+QMenuBar {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border-bottom: 1px solid #3c3c3c;
+}
+
+/* Top-level items (File, Edit, etc.) */
+QMenuBar::item {
+    background: transparent;
+    padding: 6px 10px;
+}
+
+/* Hover / selected top-level */
+QMenuBar::item:selected {
+    background-color: #2d2d30;
+    color: #ffffff;
+}
+
+/* Pressed (menu open) */
+QMenuBar::item:pressed {
+    background-color: #0078d4;
+    color: #ffffff;
+}
+
+/* ===== DROPDOWN MENU ===== */
+QMenu {
+    background-color: #2d2d30;
+    color: #e0e0e0;
+    border: 1px solid #3c3c3c;
+}
+
+/* Items inside menu */
+QMenu::item {
+    padding: 6px 25px 6px 20px;
+    background: transparent;
+}
+
+/* Hover / selected item */
+QMenu::item:selected {
+    background-color: #0078d4;
+    color: #ffffff;
+}
+
+/* Disabled items */
+QMenu::item:disabled {
+    color: #777777;
+}
+
+/* Separator */
+QMenu::separator {
+    height: 1px;
+    background: #3c3c3c;
+    margin: 4px 8px;
+}
+
 

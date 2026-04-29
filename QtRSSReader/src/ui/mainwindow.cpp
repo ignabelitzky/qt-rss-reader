@@ -119,6 +119,28 @@ void MainWindow::onFeedSelected(const QModelIndex& current, const QModelIndex& p
     m_fetcher->fetch(feed.id, QUrl(feed.url));
 }
 
+void MainWindow::onContactActionTriggered()
+{
+    QMessageBox msgBox(this);
+    msgBox.setWindowTitle("Contact");
+
+    msgBox.setTextFormat(Qt::RichText);
+    msgBox.setTextInteractionFlags(Qt::TextBrowserInteraction);
+
+    msgBox.setText(
+        "<h3>Qt RSS Reader</h3>"
+        "<p>A simple desktop RSS reader built with Qt.</p>"
+        "<p><b>Author:</b> Ignacio Belitzky</p>"
+        "<p><b>GitHub:</b> "
+        "<a href='https://github.com/ignabelitzky/qt-rss-reader'>"
+        "Project Repository</a></p>"
+    );
+
+    msgBox.setStandardButtons(QMessageBox::Ok);
+
+    msgBox.exec();
+}
+
 void MainWindow::setupConnections()
 {
     connect(ui->refreshButton, &QPushButton::clicked, this, &MainWindow::onRefresh);
@@ -166,6 +188,10 @@ void MainWindow::setupConnections()
             });
 
     connect(ui->searchLineEdit, &QLineEdit::textChanged, m_searchTimer, qOverload<>(&QTimer::start));
+
+    connect(ui->addFeedAction, &QAction::triggered, this, &MainWindow::onAddFeed);
+    connect(ui->exitAction, &QAction::triggered, this, &QApplication::quit);
+    connect(ui->contactAction, &QAction::triggered, this, &MainWindow::onContactActionTriggered);
 }
 
 void MainWindow::reloadFeedsPreserveSelection()
@@ -203,3 +229,4 @@ void MainWindow::reloadFeedsPreserveSelection()
 
     selModel->blockSignals(false);
 }
+
