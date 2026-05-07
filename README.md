@@ -51,6 +51,27 @@ make
 This project follows the traditional structure of RSS readers built with Qt, where feeds are fetched, parsed, and displayed using models and views, similar to other Qt-based
 readers in the ecosystem.
 
+## Some RSS links you can use
+**Commonplace**
+```console
+https://commoncog.com/rss/
+```
+
+**Engadget**
+```console
+https://commoncog.com/rss/
+```
+
+**Fast Company**
+```console
+http://feeds.feedburner.com/fastcompany/headlines
+```
+
+**The Verge**
+```console
+http://feeds.feedburner.com/fastcompany/headlines
+```
+
 ## License
 This project is licensed under the [GNU General Public License v3.0](LICENSE). You can find the full text of the license here [LICENSE](LICENSE).
 
