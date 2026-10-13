@@ -59,7 +59,7 @@ https://commoncog.com/rss/
 
 **Engadget**
 ```console
-https://commoncog.com/rss/
+http://www.engadget.com/rss-full.xml
 ```
 
 **Fast Company**
@@ -69,7 +69,7 @@ http://feeds.feedburner.com/fastcompany/headlines
 
 **The Verge**
 ```console
-http://feeds.feedburner.com/fastcompany/headlines
+http://www.theverge.com/rss/full.xml
 ```
 
 ## License
